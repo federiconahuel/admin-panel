@@ -1,0 +1,15 @@
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    gap: 1rem;
+    width: 100%;
+    justify-content:flex-end;
+    
+}
+
+.__editor {
+    height: 40vh !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
