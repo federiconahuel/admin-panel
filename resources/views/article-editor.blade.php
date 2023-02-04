@@ -41,7 +41,7 @@
         <b>Contenido del artículo</b>
         <div class="editor-container">
             <div data-tiny-editor data-formatblock="no" data-fontname="no">
-                {{ $content }} 
+                {!! $content !!} 
             </div>
             @if ($draft_last_update) 
                 <div class="pt-4">
