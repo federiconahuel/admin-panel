@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,9 @@ Route::get('/admin-panel', function () {
     return view('home');
 });
 
-Route::get('admin-panel/articles/create', function () {
-    return view('create-article');
-});
+Route::get('/admin-panel/articles/create', [ArticleController::class, 'create']);
+Route::get('/admin-panel/articles/edit/{id}', [ArticleController::class, 'edit'])->name('edit');
+
 
 Route::get('/login', function () {
     return view('login');
