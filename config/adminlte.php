@@ -333,13 +333,13 @@ return [
             'icon' => 'fas fa-edit',
             //'can'  => 'manage-blog',
         ],
-        /*[
+        [
             'text' => 'Editar artículo',
-            'url'  => 'admin-panel/articles/edit',
+            'url'  => '/admin-panel/articles/search',
             'icon' => 'fas fa-edit',
             //'can'  => 'manage-blog',
         ],
-        [
+        /*[
             'text' => 'Remover artículo',
             'url'  => 'admin-panel/articles/remove',
             'icon' => 'fas fa-trash-alt',

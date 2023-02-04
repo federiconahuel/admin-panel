@@ -20,6 +20,7 @@ Route::get('/admin-panel', function () {
 
 Route::get('/admin-panel/articles/create', [ArticleController::class, 'create']);
 Route::get('/admin-panel/articles/edit/{id}', [ArticleController::class, 'edit'])->name('edit');
+Route::get('/admin-panel/articles/search', [ArticleController::class, 'loadSearchArticlesView']);
 
 
 Route::get('/login', function () {
