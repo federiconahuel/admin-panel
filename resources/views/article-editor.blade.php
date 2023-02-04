@@ -29,7 +29,13 @@
     
     <form id="articleForm" class="py-3">
         <div class="row">   
+        @if ($isPublished) 
+            <div class="w-100" tabindex="0" data-toggle="popover" data-trigger="focus" data-content="Para cambiar el título, antes debe dar de baja la publicación" data-placement="top">
+                <x-adminlte-input class="title-input" style="pointer-events: none;" name="title" label="Título del artículo" placeholder="Ingrese título" fgroup-class="col-12" disabled disable-feedback value="{{ $title }}"/>
+            </div>
+        @else  
             <x-adminlte-input class="title-input" name="title" label="Título del artículo" placeholder="Ingrese título" fgroup-class="col-12" disable-feedback value="{{ $title }}"/>
+        @endif
         </div>
         <input type="hidden" name="content" value=""/>
         <b>Contenido del artículo</b>
@@ -81,6 +87,7 @@
         pointer-events: none;
         opacity: 0.4;
     }
+
 </style>
 @stop
 
@@ -88,6 +95,15 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://unpkg.com/tiny-editor/dist/bundle.js"></script>
     <script>
+
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+
+        $('.popover-dismiss').popover({
+            trigger: 'focus'
+        })
+
         document.forms.articleForm.content.value = document.querySelector('[data-tiny-editor]').innerHTML;
         document.querySelector('[data-tiny-editor]').addEventListener('keypress', e => {
             document.forms.articleForm.content.value = document.querySelector('[data-tiny-editor]').innerHTML;
