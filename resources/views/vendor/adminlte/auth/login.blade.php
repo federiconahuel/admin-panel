@@ -83,6 +83,7 @@
     </form>
 @stop
 
+<?php /* 
 @section('auth_footer')
     {{-- Password reset link --}}
     @if($password_reset_url)
@@ -102,3 +103,4 @@
         </p>
     @endif
 @stop
+*/ ?> 
