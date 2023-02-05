@@ -35,7 +35,7 @@
         @endforeach
     </div>
 
-    <div class="d-flex justify-content-centerq">
+    <div class="d-flex justify-content-center">
         {!! $articles->links() !!}
     </div>
     </div>
