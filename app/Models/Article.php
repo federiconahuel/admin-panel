@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 
 
 class Article extends Model
@@ -35,5 +38,34 @@ class Article extends Model
         ];
     }
 
+    public function createdAt(): Attribute
+    {
+        return new Attribute(
+            get: function( $originalValue ){
+                return Carbon::createFromTimestamp(strtotime($originalValue))
+                ->timezone('America/Argentina/Buenos_Aires')
+                ->format("d-m-Y H:i:s");
+        });
+    }
 
+    public function draftLastUpdate(): Attribute
+    {
+        return new Attribute(
+            get: function( $originalValue ){
+                return Carbon::createFromTimestamp(strtotime($originalValue))
+                ->timezone('America/Argentina/Buenos_Aires')
+                ->format("d-m-Y H:i:s");
+        });
+    }
+
+    public function publicationLastUpdate(): Attribute
+    {
+        return new Attribute(
+            get: function( $originalValue ){
+                return Carbon::createFromTimestamp(strtotime($originalValue))
+                ->timezone('America/Argentina/Buenos_Aires')
+                ->format("d-m-Y H:i:s");
+        });
+    }
+   
 }
