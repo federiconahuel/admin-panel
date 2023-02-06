@@ -57,12 +57,28 @@
 </div>
 
 {{-- Minimal --}}
-<x-adminlte-modal id="modalMin" static-backdrop title="Confirmar baja de publicación de artículo">
+<x-adminlte-modal id="modalMin" static-backdrop title="Confirmar baja de publicación de artículo" theme="warning">
     <x-slot name="footerSlot">
         <x-adminlte-button type="submit" theme="success" label="Aceptar" onclick="unpublish('{{ $articleID }}')"/>
         <x-adminlte-button theme="danger" label="Cancelar" data-dismiss="modal"/>
     </x-slot>
 </x-adminlte-modal>
+
+{{-- Custom --}}
+<x-adminlte-modal id="errorModal" static-backdrop title="Error" theme="danger"
+    icon="fa fa-exclamation" v-centered static-backdrop scrollable>
+    <div style="height:auto;">Ha habido un error. Por favor, intente nuevamente</div>
+    <x-slot name="footerSlot">
+        <div class="d-flex justify-content-end">
+            <x-adminlte-button class="mr-auto" theme="danger" label="Cerrar" data-dismiss="modal"/>
+        </div>
+        <!--x-adminlte-button theme="danger" label="Dismiss" data-dismiss="modal"/-->
+    </x-slot>
+</x-adminlte-modal>
+
+{{-- Example button to open modal 
+<x-adminlte-button label="Open Modal" data-toggle="modal" data-target="#errorModal" class="bg-teal"/>
+--}}
 
 @stop
 
@@ -104,6 +120,8 @@
             trigger: 'focus'
         })
 
+        
+
         document.forms.articleForm.content.value = document.querySelector('[data-tiny-editor]').innerHTML;
         document.querySelector('[data-tiny-editor]').addEventListener('keypress', e => {
             document.forms.articleForm.content.value = document.querySelector('[data-tiny-editor]').innerHTML;
@@ -117,6 +135,17 @@
             document.querySelector('.save-changes-btn').disabled = true
             document.querySelector('[data-tiny-editor]').classList.add("disabled")
         }
+
+        function enableEditor() {
+            var form  = document.getElementById("articleForm");
+            for (const element of form.elements) {
+                element.disabled = false;
+            }
+            document.querySelector('.save-changes-btn').disabled = false
+            document.querySelector('[data-tiny-editor]').classList.remove("disabled")
+        }
+
+
 
         function disableUnpublishModal(){
             document.querySelector("#modalMin .close").disabled = true
@@ -141,7 +170,9 @@
                 window.location.replace('/admin-panel/articles/edit/' + id)
             })
             .catch(function (error) {
+                $('#errorModal').modal('show')
                 console.log(error);
+                enableEditor();
             });
         }
         
@@ -151,7 +182,9 @@
                 window.location.replace('/admin-panel/articles/edit/' + id)
             })
             .catch(function (error) {
+                $('#errorModal').modal('show')
                 console.log(error);
+                enableEditor();
             });
         }
     </script>
