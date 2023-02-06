@@ -144,4 +144,8 @@ return [
         ]),
     ],
 
+    'redirects' => [
+        'logout' => 'admin-panel/login',
+    ],
+
 ];
