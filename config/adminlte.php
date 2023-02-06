@@ -254,9 +254,9 @@ return [
 
     'use_route_url' => false,
     'dashboard_url' => 'admin-panel',
-    'logout_url' => 'logout',
-    'login_url' => 'login',
-    'register_url' => 'register',
+    'logout_url' => 'admin-panel/logout',
+    'login_url' => 'admin-panel/login',
+    'register_url' => 'admin-panel/register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
     'profile_url' => false,
@@ -300,26 +300,6 @@ return [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],*/
-
-        [
-            'text'    => 'Usuario',
-            'icon'    => 'fas fa-fw fa-user',
-            'topnav_right' => true,
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
 
         // Sidebar items:
         /*[
