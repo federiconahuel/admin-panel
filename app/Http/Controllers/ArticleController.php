@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use Illuminate\Support\Str;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use DateTime;
+use DateTimeZone;
 
 
 
@@ -41,30 +43,33 @@ class ArticleController extends Controller
     public function save (Request $request, $id) {
         $publish = $request->boolean('publish');
         $article = Article::find($id);
+        $date = now();
+        $newTitle = $request->title == null ? 'Sin título' : $request->title;
+        $newContent = $request->draft_content == null ? '' : $request->content;
         if($article != null){
-            if($article->title != $request->title) {
-                $article->title = $request->title;
-                $article->slug = SlugService::createSlug(Article::class, 'slug', $request->title);
+            if($article->title != $newTitle) {
+                $article->title = $newTitle;
+                $article->slug = SlugService::createSlug(Article::class, 'slug', $newTitle);
             }
-            if($article->draft_content != $request->content) {
-                $article->draft_content = $request->content;
-                $article->draft_last_update = now(); 
+            if($article->draft_content != $newContent) {
+                $article->draft_content = $newContent;
+                $article->draft_last_update = $date;
             }
             $article->save();
         } else {
             Article::create([
                 'id' => $id,
-                'title' => $request->title,
-                'draft_content' => $request->content,
-                'draft_last_update' => now()
+                'title' => $newTitle,
+                'draft_content' => $newContent,
+                'draft_last_update' => $date
             ]);
         }
         if($publish){
             Article::where('id', $id)
                 ->update([
                     'is_published' => true,
-                    'publication_last_update' => now(),     
-                    'publication_content' =>  $request->content
+                    'publication_last_update' => $date,     
+                    'publication_content' =>  $newContent
                 ]);
         }    
         return response()->noContent();
@@ -80,7 +85,7 @@ class ArticleController extends Controller
     }
 
     public function loadSearchArticlesView(){
-        $articles = Article::paginate(5);
+        $articles = Article::orderBy('created_at', 'DESC')->paginate(5);
         return view('search-articles', compact('articles'));
     }
 
