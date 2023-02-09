@@ -14,15 +14,21 @@ use App\Http\Controllers\ArticleController;
 |
 */
 
-Route::get('/admin-panel', function () {
-    return view('home');
+
+
+Route::middleware(['auth:web'])->group(function () {
+    Route::get('/admin-panel', function () {
+        return view('home');
+    });
+    Route::get('/admin-panel/articles/create', [ArticleController::class, 'create']);
+    Route::get('/admin-panel/articles/edit/{id}', [ArticleController::class, 'edit'])->name('edit');
+    Route::get('/admin-panel/articles/search', [ArticleController::class, 'loadSearchArticlesView']);
+
+    Route::post('/api/articles/save/{id}', [ArticleController::class, 'save']);
+    Route::post('/api/articles/unpublish/{id}', [ArticleController::class, 'unpublish']);
 });
 
-Route::get('/admin-panel/articles/create', [ArticleController::class, 'create']);
-Route::get('/admin-panel/articles/edit/{id}', [ArticleController::class, 'edit'])->name('edit');
-Route::get('/admin-panel/articles/search', [ArticleController::class, 'loadSearchArticlesView']);
 
-
-Route::get('/login', function () {
-    return view('login');
+Route::get('/admin-panel/register'.env('USER_REGISTRATION_KEY'), function () {
+    return view('vendor.adminlte.auth.register');
 });
