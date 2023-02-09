@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Models\User;
+
 
 
 
@@ -67,5 +69,11 @@ class Article extends Model
                 ->format("d-m-Y H:i:s");
         });
     }
+
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
    
 }

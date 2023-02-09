@@ -24,6 +24,8 @@ return new class extends Migration
             $table->text('publication_content')->nullable();
             $table->dateTime('publication_last_update')->nullable();
             $table->string('slug');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::table('articles', function (Blueprint $table) {
