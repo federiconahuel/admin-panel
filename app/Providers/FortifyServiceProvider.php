@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Hash;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -42,10 +42,13 @@ class FortifyServiceProvider extends ServiceProvider
             }
         });
 
-        /*Fortify::registerView(function () {
-            return view('auth.register');
-        });
+        
 
+        /*
+        Fortify::registerView(function () {
+            return view('vendor.adminlte.auth.register');
+        });
+        
         Fortify::requestPasswordResetLinkView(function () {
             return view('auth.forgot-password');
         });
