@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Buscador de artículos')
 
 @section('content_header')
     <h1>Buscar artículos</h1>
