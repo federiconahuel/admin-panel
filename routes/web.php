@@ -20,9 +20,9 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/admin-panel', function () {
         return view('home');
     });
-    Route::get('/admin-panel/articles/create', [ArticleController::class, 'create']);
-    Route::get('/admin-panel/articles/edit/{id}', [ArticleController::class, 'edit'])->name('edit');
-    Route::get('/admin-panel/articles/search', [ArticleController::class, 'loadSearchArticlesView']);
+    Route::get('/admin-panel/articles/create', [ArticleController::class, 'create'])->name('create-article');
+    Route::get('/admin-panel/articles/edit/{id}', [ArticleController::class, 'edit'])->name('edit-article');
+    Route::get('/admin-panel/articles/search', [ArticleController::class, 'loadSearchArticlesView'])->name('search-articles');
 
     Route::post('/api/articles/save/{id}', [ArticleController::class, 'save']);
     Route::post('/api/articles/unpublish/{id}', [ArticleController::class, 'unpublish']);
