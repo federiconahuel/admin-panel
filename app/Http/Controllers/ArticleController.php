@@ -91,7 +91,7 @@ class ArticleController extends Controller
         if($article && ($loggedInUserID == $articleUserID)){
             $article->is_published = false;
             $article->save();
-            return redirect()->route('edit', [
+            return redirect()->route('edit-article', [
                 'id' => $id
             ]); 
         } else {
