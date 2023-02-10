@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Administrador de blog',
+    'title' => 'Panel de administrador',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>BLOG',
+    'logo' => '<b>Admin</b>PANEL',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -310,11 +310,11 @@ return [
         [
             'text' => 'Crear artículo',
             'url'  => 'admin-panel/articles/create',
-            'icon' => 'fas fa-edit',
+            'icon' => 'fas fa-plus',
             //'can'  => 'manage-blog',
         ],
         [
-            'text' => 'Editar artículo',
+            'text' => 'Modificar artículo',
             'url'  => '/admin-panel/articles/search',
             'icon' => 'fas fa-edit',
             //'can'  => 'manage-blog',
