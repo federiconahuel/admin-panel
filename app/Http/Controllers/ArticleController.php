@@ -54,7 +54,7 @@ class ArticleController extends Controller
         $loggedInUser = Auth::user();
         $date = now();
         $newTitle = $request->title == null ? 'Sin título' : $request->title;
-        $newContent = $request->draft_content == null ? '' : $request->content;
+        $newContent = $request->content == null ? '' : $request->content;
         if($article && ($article->user->id == $loggedInUser->id)){ 
             if($article->title != $newTitle) {
                 $article->title = $newTitle;
