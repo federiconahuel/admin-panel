@@ -100,7 +100,7 @@ class ArticleController extends Controller
     }
 
     public function loadSearchArticlesView(){
-        $articles = Article::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(5);
+        $articles = Article::where('user_id', Auth::user()->id)->orderBy('updated_at', 'DESC')->paginate(5);
         return view('search-articles', compact('articles'));
     }
 
