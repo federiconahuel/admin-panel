@@ -27,11 +27,11 @@
             <x-adminlte-card theme="primary" >
                 <div class="d-flex justify-content-between">
                     <h5>
-                        <i class="fas fa-edit" aria-hidden="true"></i>
-                        Modificar artículo
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        Buscar artículo
                     </h5>
                     <a href="{{  route('search-articles')  }}">
-                        Seleccionar artículo
+                        Ir a buscador 
                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
                     </a>
                 </div>
