@@ -13,7 +13,7 @@
         @if ($isPublished) 
             <div>
                 <p>
-                    <b>Estado de publicación del artículo</b>: Publicado en <a href="#">url.com/blog/{{ $slug }}</a>
+                    <b>Estado de publicación del artículo</b>: Publicado en <a href="{{ env('APP_URL') }}/novedades/{{ $slug }}">{{ env('APP_URL') }}/novedades/{{ $slug }}</a>
                 </p>
                 <p>
                     Última actualización de publicación: {{ $publication_last_update }}
