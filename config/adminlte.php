@@ -314,9 +314,9 @@ return [
             //'can'  => 'manage-blog',
         ],
         [
-            'text' => 'Modificar artículo',
+            'text' => 'Buscar artículo',
             'url'  => '/admin-panel/articles/search',
-            'icon' => 'fas fa-edit',
+            'icon' => 'fas fa-search',
             //'can'  => 'manage-blog',
         ],
         /*[
