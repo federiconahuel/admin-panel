@@ -16,7 +16,7 @@
                         <p><b>Última modificación en la versión borrador</b>: {{$article->draft_last_update}}</p>                        
                         <p><b>Estado de publicación</b>: 
                             @if ($article->is_published) 
-                                Publicado en <a href="#">url.com/blog/{{ $article->slug }}</a>
+                                Publicado en <a href="{{ env('APP_URL') }}/novedades/{{ $article->slug }}">{{ env('APP_URL') }}/novedades/{{ $article->slug }}</a>
                             @else
                                 No publicado
                             @endif
