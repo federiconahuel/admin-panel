@@ -39,10 +39,11 @@
         </div>
         <input type="hidden" name="content" value=""/>
         <b>Contenido del artículo</b>
-        <div class="editor-container">
-            <div data-tiny-editor data-formatblock="no" data-fontname="no">
+        <div class="editor-container mt-2">
+            <!--div data-tiny-editor data-formatblock="no" data-fontname="no">
                 {!! $content !!} 
-            </div>
+            </div-->
+            <textarea id="editor"></textarea>
             @if ($draft_last_update) 
                 <div class="pt-4">
                     Última modificación del borrador: {{ $draft_last_update }}
@@ -121,8 +122,24 @@
 
 @section('js')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://unpkg.com/tiny-editor/dist/bundle.js"></script>
+    <!--script src="https://unpkg.com/tiny-editor/dist/bundle.js"></script-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.7/tinymce.min.js"></script>
     <script>
+
+        document.querySelector('#editor').innerHTML= `{!! $content !!}`;
+
+
+        tinymce.init({
+            selector: "#editor",
+            menubar: false,
+            plugins: [
+                "advlist", "anchor", "autolink", "charmap", "code", "fullscreen", 
+                "help", "image", "insertdatetime", "link", "lists", "media", 
+                "preview", "searchreplace", "table", "visualblocks", 
+            ],
+            toolbar: "undo redo | styles | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+
 
         $(function () {
             $('[data-toggle="popover"]').popover()
@@ -134,10 +151,13 @@
 
         
 
-        document.forms.articleForm.content.value = document.querySelector('[data-tiny-editor]').innerHTML;
+
+        
+
+        /*document.forms.articleForm.content.value = document.querySelector('[data-tiny-editor]').innerHTML;
         document.querySelector('[data-tiny-editor]').addEventListener('keypress', e => {
             document.forms.articleForm.content.value = document.querySelector('[data-tiny-editor]').innerHTML;
-        });
+        });*/
 
         function disableEditor() {
             var form  = document.getElementById("articleForm");
@@ -145,7 +165,8 @@
                 element.disabled = true;
             }
             //document.querySelector('.save-draft-btn').disabled = true
-            document.querySelector('[data-tiny-editor]').classList.add("disabled")
+            //document.querySelector('[data-tiny-editor]').classList.add("disabled")
+            document.querySelector('#editor').classList.add("disabled")
         }
 
         function enableEditor() {
@@ -154,7 +175,8 @@
                 element.disabled = false;
             }
             document.querySelector('.save-draft-btn').disabled = false
-            document.querySelector('[data-tiny-editor]').classList.remove("disabled")
+            //document.querySelector('[data-tiny-editor]').classList.remove("disabled")
+            document.querySelector('#editor').classList.remove("disabled")
         }
 
 
@@ -166,6 +188,7 @@
         }
 
         function save(id, publish) {
+            console.log(tinymce.get("editor").getContent())
             disableEditor()
             url = '/api/articles/save/' + id
             if(publish) {
@@ -178,7 +201,7 @@
             document.querySelector('.loading-spinner-container').style.display = 'flex'
             axios.post(url, {
                 title: document.querySelector('.title-input').value,
-                content: document.querySelector('[data-tiny-editor]').innerHTML,
+                content: tinymce.get("editor").getContent()
             })
             .then(() => {
                 window.location.replace('/admin-panel/articles/edit/' + id)
